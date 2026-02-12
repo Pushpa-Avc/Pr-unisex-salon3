@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PR Unisex Salon | Premium Grooming - Kharsang, Arunachal Pradesh</title>
+  <meta name="description" content="PR Unisex Salon - Kharsang's finest grooming destination. Expert haircuts, hair spa, beard styling, facials & makeup. Near Kharsang Bridge. Open Mon-Sun 10AM-8PM." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0A1128;
+      --navy2: #13203d;
+      --gold: #D4AF37;
+      --gold2: #f0c840;
+      --cream: #FAF9F6;
+      --white: #ffffff;
+      --text-muted: rgba(255,255,255,0.6);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITIES ── */
+    .gold-gradient { background: linear-gradient(135deg, #B8960C, var(--gold), #f0c840); }
+    .gold-text { background: linear-gradient(135deg, #B8960C, var(--gold), #f0c840); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .section-label { font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 600; color: var(--gold); margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.15; }
+    .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); width: 80px; margin: 1rem auto 0; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+    nav.scrolled { background: var(--navy); box-shadow: 0 4px 30px rgba(0,0,0,0.4); padding: 0.7rem 1.5rem; }
+
+    .nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+    .nav-logo-icon { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .nav-logo-text { line-height: 1.1; }
+    .nav-logo-text span:first-child { display: block; font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.1rem; font-weight: 700; }
+    .nav-logo-text span:last-child { display: block; color: rgba(255,255,255,0.5); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; }
+
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; text-transform: capitalize; }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold); color: var(--navy); padding: 0.55rem 1.3rem;
+      border-radius: 50px; font-weight: 700; font-size: 0.8rem; text-decoration: none;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: white; margin: 5px 0; transition: all 0.3s; border-radius: 2px; }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--navy); z-index: 99; flex-direction: column;
+      align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: white; text-decoration: none; font-size: 1.3rem; font-family: 'Playfair Display', serif; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close { position: absolute; top: 1.2rem; right: 1.5rem; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=1600&fit=crop&auto=format');
+      background-size: cover; background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(10,17,40,0.92) 0%, rgba(10,17,40,0.70) 60%, rgba(10,17,40,0.85) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2; text-align: center;
+      padding: 2rem 1.5rem; max-width: 800px; margin: 0 auto;
+      animation: fadeUp 0.9s ease-out;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.4);
+      border-radius: 50px; padding: 0.4rem 1rem; margin-bottom: 1.5rem;
+      font-size: 0.72rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      color: white; font-weight: 700; line-height: 1.1; margin-bottom: 1rem;
+    }
+    .hero-sub { color: rgba(255,255,255,0.75); font-size: clamp(0.95rem, 2.5vw, 1.15rem); max-width: 560px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .hero-rating { display: flex; align-items: center; justify-content: center; gap: 0.3rem; margin-bottom: 2rem; color: rgba(255,255,255,0.7); font-size: 0.85rem; }
+    .stars { color: var(--gold); font-size: 1rem; letter-spacing: 2px; }
+
+    .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-bottom: 2.5rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: #25D366; color: white; padding: 0.9rem 2rem;
+      border-radius: 50px; font-weight: 700; text-decoration: none; font-size: 0.95rem;
+      transition: all 0.25s; box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    }
+    .btn-primary:hover { background: #20ba58; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.45); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      border: 2px solid rgba(255,255,255,0.5); color: white; padding: 0.9rem 2rem;
+      border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 0.95rem;
+      transition: all 0.25s;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
+    .hero-info-item { display: flex; align-items: center; gap: 0.4rem; color: rgba(255,255,255,0.65); font-size: 0.82rem; }
+    .hero-info-item .icon { color: var(--gold); }
+
+    /* ── FEATURES ── */
+    #about { background: var(--navy); padding: 5rem 1.5rem; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-header .section-title { color: white; }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 1rem; padding: 1.8rem;
+      transition: all 0.3s; backdrop-filter: blur(10px);
+    }
+    .feature-card:hover { transform: translateY(-5px); border-color: rgba(212,175,55,0.5); background: rgba(255,255,255,0.08); }
+    .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; }
+    .feature-card h3 { color: white; font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .feature-card p { color: rgba(255,255,255,0.55); font-size: 0.85rem; line-height: 1.7; }
+
+    /* ── SERVICES ── */
+    #services { padding: 5rem 1.5rem; background: var(--cream); }
+    .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 2.5rem; }
+    .filter-tab {
+      padding: 0.5rem 1.3rem; border-radius: 50px; font-size: 0.82rem; font-weight: 600;
+      border: 1.5px solid rgba(10,17,40,0.2); background: white; color: rgba(10,17,40,0.6);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .filter-tab.active, .filter-tab:hover { background: var(--navy); color: var(--gold); border-color: var(--navy); }
+
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
+    .service-card {
+      background: white; border-radius: 1rem; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07); transition: all 0.3s;
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.13); }
+    .service-img-wrap { position: relative; height: 180px; overflow: hidden; }
+    .service-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .service-card:hover .service-img-wrap img { transform: scale(1.08); }
+    .service-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,17,40,0.6), transparent); }
+    .popular-badge { position: absolute; top: 10px; left: 10px; background: var(--gold); color: var(--navy); font-size: 0.65rem; font-weight: 700; padding: 3px 8px; border-radius: 50px; }
+    .service-cat { position: absolute; bottom: 10px; left: 12px; color: rgba(255,255,255,0.8); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .service-body { padding: 1.2rem; }
+    .service-body h3 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .service-body p { font-size: 0.78rem; color: rgba(10,17,40,0.55); line-height: 1.6; margin-bottom: 0.9rem; }
+    .service-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .service-price { color: var(--gold); font-weight: 700; font-size: 1.1rem; }
+    .service-duration { color: rgba(10,17,40,0.4); font-size: 0.75rem; }
+    .btn-book {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      width: 100%; padding: 0.65rem; border-radius: 0.6rem;
+      background: var(--navy); color: white; text-decoration: none; font-size: 0.8rem; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-book:hover { background: var(--gold); color: var(--navy); }
+
+    /* ── GALLERY ── */
+    #gallery { padding: 5rem 1.5rem; background: white; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+    @media (max-width: 480px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    .gallery-item { aspect-ratio: 1; overflow: hidden; border-radius: 0.75rem; position: relative; cursor: pointer; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-overlay { position: absolute; inset: 0; background: rgba(10,17,40,0); transition: all 0.3s; display: flex; align-items: center; justify-content: center; }
+    .gallery-item:hover .gallery-overlay { background: rgba(10,17,40,0.4); }
+    .gallery-overlay span { color: var(--gold); font-size: 1.8rem; opacity: 0; transition: opacity 0.3s; }
+    .gallery-item:hover .gallery-overlay span { opacity: 1; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--navy); padding: 5rem 0; overflow: hidden; }
+    #testimonials .section-header { padding: 0 1.5rem; }
+    #testimonials .section-title { color: white; }
+
+    .testimonials-track-wrap { overflow: hidden; position: relative; margin-top: 2.5rem; }
+    .testimonials-track-wrap::before,
+    .testimonials-track-wrap::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+    }
+    .testimonials-track-wrap::before { left: 0; background: linear-gradient(to right, var(--navy), transparent); }
+    .testimonials-track-wrap::after { right: 0; background: linear-gradient(to left, var(--navy), transparent); }
+
+    .testimonials-track { display: flex; gap: 1.2rem; animation: scrollLeft 35s linear infinite; width: max-content; }
+    .testimonials-track:hover { animation-play-state: paused; }
+    @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .testimonial-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(212,175,55,0.2);
+      border-radius: 1rem; padding: 1.5rem; width: 280px; flex-shrink: 0;
+    }
+    .t-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 0.8rem; }
+    .t-text { color: rgba(255,255,255,0.75); font-size: 0.82rem; line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+    .t-author { display: flex; align-items: center; gap: 0.8rem; }
+    .t-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--navy); font-weight: 700; font-size: 0.85rem; flex-shrink: 0; }
+    .t-name { color: white; font-weight: 600; font-size: 0.85rem; }
+    .t-role { color: rgba(255,255,255,0.4); font-size: 0.72rem; }
+
+    /* ── LOCATION ── */
+    #location { padding: 5rem 1.5rem; background: var(--cream); }
+    .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    @media (max-width: 768px) { .location-grid { grid-template-columns: 1fr; } }
+
+    .location-card { background: white; border-radius: 1.2rem; padding: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+    .location-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: 1.5rem; }
+    .info-row { display: flex; gap: 1rem; align-items: flex-start; margin-bottom: 1.2rem; }
+    .info-icon { width: 42px; height: 42px; background: rgba(10,17,40,0.06); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .info-label { font-size: 0.75rem; font-weight: 600; color: rgba(10,17,40,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+    .info-value { font-size: 0.9rem; color: var(--navy); line-height: 1.5; }
+    .info-value a { color: var(--navy); text-decoration: none; }
+    .info-value a:hover { color: var(--gold); }
+    .open-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: #dcfce7; color: #16a34a; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-top: 0.3rem; }
+    .open-dot { width: 6px; height: 6px; border-radius: 50%; background: #16a34a; }
+
+    .loc-btns { display: flex; gap: 0.8rem; margin-top: 1.5rem; }
+    .loc-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem; border-radius: 0.75rem; font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .loc-btn-navy { background: var(--navy); color: white; }
+    .loc-btn-navy:hover { background: var(--gold); color: var(--navy); }
+    .loc-btn-wa { background: #25D366; color: white; }
+    .loc-btn-wa:hover { background: #20ba58; }
+
+    .map-wrap { border-radius: 1.2rem; overflow: hidden; height: 420px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* ── CTA BANNER ── */
+    #cta { background: var(--navy); padding: 5rem 1.5rem; text-align: center; position: relative; overflow: hidden; }
+    #cta::before { content: ''; position: absolute; top: -50%; left: 20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); }
+    #cta::after { content: ''; position: absolute; bottom: -50%; right: 20%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(212,175,55,0.10) 0%, transparent 70%); }
+    .cta-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+    .cta-content .section-title { color: white; }
+    .cta-content p { color: rgba(255,255,255,0.65); margin: 1rem 0 2rem; font-size: 1rem; }
+    .cta-btns { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+
+    /* ── FOOTER ── */
+    footer { background: #050b1a; color: white; padding: 3.5rem 1.5rem 1.5rem; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .footer-brand p { color: rgba(255,255,255,0.45); font-size: 0.82rem; line-height: 1.7; margin-top: 0.8rem; }
+    .social-links { display: flex; gap: 0.6rem; margin-top: 1.2rem; }
+    .social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; text-decoration: none; color: white; font-size: 0.9rem; transition: all 0.2s; }
+    .social-link:hover { background: rgba(212,175,55,0.2); color: var(--gold); }
+    .footer-col h4 { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1rem; margin-bottom: 1rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.6rem; }
+    .footer-col ul li a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.5rem; }
+    .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 0.75rem; }
+
+    /* ── FLOATING WHATSAPP ── */
+    .wa-float {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 99;
+      width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: all 0.2s; animation: waPulse 2.5s ease-in-out infinite;
+    }
+    .wa-float:hover { background: #20ba58; transform: scale(1.1); }
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7); }
+    }
+
+    /* ── HIDDEN (for filter) ── */
+    .service-card.hidden { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-icon gold-gradient">✂️</div>
+    <div class="nav-logo-text">
+      <span>PR Unisex</span>
+      <span>Salon · Kharsang</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#location">Location</a>
+    <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" class="nav-cta">BOOK NOW</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#gallery" onclick="closeMobile()">Gallery</a>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#location" onclick="closeMobile()">Location</a>
+  <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" onclick="closeMobile()" style="color:var(--gold)">📲 Book Now</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⭐ Kharsang's Finest Grooming Destination</div>
+    <h1 class="hero-title">Look Your<br><span class="gold-text">Absolute Best</span></h1>
+    <p class="hero-sub">Premium grooming & beauty services in the heart of Kharsang. Where every visit transforms your confidence.</p>
+    <div class="hero-rating">
+      <span class="stars">★★★★</span>
+      <span>4.0 on Google Maps</span>
+    </div>
+    <div class="hero-btns">
+      <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-primary">💬 Book via WhatsApp</a>
+      <a href="tel:+918414916341" class="btn-secondary">📞 Call Now</a>
+    </div>
+    <div class="hero-info">
+      <div class="hero-info-item"><span class="icon">🕐</span> Open 10AM–8PM Daily</div>
+      <div class="hero-info-item"><span class="icon">📍</span> Near Kharsang Bridge</div>
+      <div class="hero-info-item"><span class="icon">📞</span> +91 84149 16341</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / FEATURES -->
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Why Choose Us</p>
+      <h2 class="section-title">The PR Difference</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon gold-gradient">🏆</div>
+        <h3>Expert Stylists</h3>
+        <p>Professionally trained team with years of experience in modern hair & beauty techniques.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold-gradient">✨</div>
+        <h3>Premium Products</h3>
+        <p>Only top-tier, trusted brands used for every single service we offer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold-gradient">🛡️</div>
+        <h3>Hygienic Standards</h3>
+        <p>Sterilized tools and a spotlessly clean environment guaranteed for every visit.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold-gradient">❤️</div>
+        <h3>Personalized Care</h3>
+        <p>Every service tailored specifically to your unique needs, face shape and style.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold-gradient">👥</div>
+        <h3>Unisex Services</h3>
+        <p>Welcoming, inclusive services for men, women and everyone in between.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon gold-gradient">💰</div>
+        <h3>Affordable Prices</h3>
+        <p>Premium quality grooming at prices that respect your budget. Best value in Kharsang.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">What We Offer</p>
+      <h2 class="section-title" style="color:var(--navy)">Our Services</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">All</button>
+      <button class="filter-tab" data-filter="hair">Hair</button>
+      <button class="filter-tab" data-filter="grooming">Grooming</button>
+      <button class="filter-tab" data-filter="beauty">Beauty</button>
+    </div>
+    <div class="services-grid" id="servicesGrid">
+
+      <div class="service-card" data-category="hair">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=220&fit=crop" alt="Haircut" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="popular-badge">⭐ Popular</span>
+          <span class="service-cat">Hair</span>
+        </div>
+        <div class="service-body">
+          <h3>Haircut & Styling</h3>
+          <p>Precision cuts tailored to your face shape and lifestyle by expert stylists.</p>
+          <div class="service-meta">
+            <span class="service-price">₹150+</span>
+            <span class="service-duration">⏱ 30–45 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Haircut%20%26%20Styling%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="hair">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=220&fit=crop" alt="Hair Styling" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Hair</span>
+        </div>
+        <div class="service-body">
+          <h3>Hair Styling</h3>
+          <p>Blowouts, curls, straightening & special occasion updos with premium products.</p>
+          <div class="service-meta">
+            <span class="service-price">₹200+</span>
+            <span class="service-duration">⏱ 45–60 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Hair%20Styling%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="hair">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1583875762487-5f8f7c718d14?w=400&h=220&fit=crop" alt="Hair Spa" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="popular-badge">⭐ Popular</span>
+          <span class="service-cat">Hair</span>
+        </div>
+        <div class="service-body">
+          <h3>Hair Spa</h3>
+          <p>Deep nourishing spa treatment to restore moisture, shine and vitality to your hair.</p>
+          <div class="service-meta">
+            <span class="service-price">₹350+</span>
+            <span class="service-duration">⏱ 60–90 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Hair%20Spa%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="hair">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=220&fit=crop" alt="Hair Coloring" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Hair</span>
+        </div>
+        <div class="service-body">
+          <h3>Hair Coloring</h3>
+          <p>Full color, highlights, balayage & color correction with professional grade products.</p>
+          <div class="service-meta">
+            <span class="service-price">₹700+</span>
+            <span class="service-duration">⏱ 90–120 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Hair%20Coloring%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="hair">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1522338242992-e1a54906a8da?w=400&h=220&fit=crop" alt="Hair Treatment" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Hair</span>
+        </div>
+        <div class="service-body">
+          <h3>Hair Treatment</h3>
+          <p>Targeted treatments for damage repair, dandruff control & hair fall reduction.</p>
+          <div class="service-meta">
+            <span class="service-price">₹400+</span>
+            <span class="service-duration">⏱ 60 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Hair%20Treatment%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="grooming">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=220&fit=crop" alt="Beard Styling" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="popular-badge">⭐ Popular</span>
+          <span class="service-cat">Grooming</span>
+        </div>
+        <div class="service-body">
+          <h3>Beard Styling</h3>
+          <p>Expert beard shaping, trimming & grooming for a sharp, well-defined look.</p>
+          <div class="service-meta">
+            <span class="service-price">₹100+</span>
+            <span class="service-duration">⏱ 20–30 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Beard%20Styling%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="grooming">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400&h=220&fit=crop" alt="Clean Shave" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Grooming</span>
+        </div>
+        <div class="service-body">
+          <h3>Clean Shave</h3>
+          <p>Traditional hot towel shave with premium products for a smooth, refreshing finish.</p>
+          <div class="service-meta">
+            <span class="service-price">₹80+</span>
+            <span class="service-duration">⏱ 15–20 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Clean%20Shave%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="grooming">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=400&h=220&fit=crop" alt="Complete Grooming" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="popular-badge">⭐ Popular</span>
+          <span class="service-cat">Grooming</span>
+        </div>
+        <div class="service-body">
+          <h3>Complete Grooming</h3>
+          <p>Head-to-toe premium grooming package — haircut, beard styling, facial & more.</p>
+          <div class="service-meta">
+            <span class="service-price">₹600+</span>
+            <span class="service-duration">⏱ 90–120 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Complete%20Grooming%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="beauty">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=220&fit=crop" alt="Facial" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Beauty</span>
+        </div>
+        <div class="service-body">
+          <h3>Facial</h3>
+          <p>Revitalizing deep-cleanse facial for glowing, healthy, refreshed-looking skin.</p>
+          <div class="service-meta">
+            <span class="service-price">₹300+</span>
+            <span class="service-duration">⏱ 45–60 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Facial%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="beauty">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=400&h=220&fit=crop" alt="Makeup" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="popular-badge">⭐ Popular</span>
+          <span class="service-cat">Beauty</span>
+        </div>
+        <div class="service-body">
+          <h3>Makeup</h3>
+          <p>Professional makeup artistry for all occasions — bridal, party, engagement & events.</p>
+          <div class="service-meta">
+            <span class="service-price">₹500+</span>
+            <span class="service-duration">⏱ 60–90 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Makeup%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="beauty">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&h=220&fit=crop" alt="Cleanup" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Beauty</span>
+        </div>
+        <div class="service-body">
+          <h3>Cleanup</h3>
+          <p>Quick, targeted skin cleanup to remove dead cells, unclog pores & brighten skin.</p>
+          <div class="service-meta">
+            <span class="service-price">₹200+</span>
+            <span class="service-duration">⏱ 30–45 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Cleanup%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+      <div class="service-card" data-category="beauty">
+        <div class="service-img-wrap">
+          <img src="https://images.unsplash.com/photo-1588516903720-8ceb67f96d58?w=400&h=220&fit=crop" alt="Threading & Waxing" loading="lazy" />
+          <div class="service-img-overlay"></div>
+          <span class="service-cat">Beauty</span>
+        </div>
+        <div class="service-body">
+          <h3>Threading & Waxing</h3>
+          <p>Precise eyebrow threading, full face threading & smooth waxing services.</p>
+          <div class="service-meta">
+            <span class="service-price">₹50+</span>
+            <span class="service-duration">⏱ 10–30 min</span>
+          </div>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20Threading%20%26%20Waxing%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-book">Book This Service →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Our Work</p>
+      <h2 class="section-title" style="color:var(--navy)">Gallery</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400&h=400&fit=crop" alt="Salon" loading="lazy" /><div class="gallery-overlay"><span>✨</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=400&fit=crop" alt="Hair" loading="lazy" /><div class="gallery-overlay"><span>✨</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400&h=400&fit=crop" alt="Beard" loading="lazy" /><div class="gallery-overlay"><span>✨</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop" alt="Facial" loading="lazy" /><div class="gallery-overlay"><span>✨</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1512207736890-6ffed8a84e8d?w=400&h=400&fit=crop" alt="Makeup" loading="lazy" /><div class="gallery-overlay"><span>✨</span></div></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&h=400&fit=crop" alt="Color" loading="lazy" /><div class="gallery-overlay"><span>✨</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container section-header">
+    <p class="section-label">Happy Clients</p>
+    <h2 class="section-title">What They Say</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testimonials-track-wrap">
+    <div class="testimonials-track">
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Best salon in Kharsang! The hair spa was absolutely amazing. My hair feels so silky now."</p><div class="t-author"><div class="t-avatar gold-gradient">P</div><div><div class="t-name">Priya Sharma</div><div class="t-role">Regular Customer</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Excellent beard styling! The staff are skilled and very professional. Highly recommended!"</p><div class="t-author"><div class="t-avatar gold-gradient">R</div><div><div class="t-name">Rohan Das</div><div class="t-role">Loyal Customer</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Love this place! Clean, hygienic and they use quality products. My go-to salon always."</p><div class="t-author"><div class="t-avatar gold-gradient">S</div><div><div class="t-name">Sunita Boruah</div><div class="t-role">Happy Client</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★☆</div><p class="t-text">"Great haircut experience. The stylist understood exactly what I wanted. Will definitely come back!"</p><div class="t-author"><div class="t-avatar gold-gradient">A</div><div><div class="t-name">Amit Gogoi</div><div class="t-role">Customer</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"The bridal makeup they did for my wedding was stunning. Got so many compliments from everyone!"</p><div class="t-author"><div class="t-avatar gold-gradient">D</div><div><div class="t-name">Deepika Choudhury</div><div class="t-role">Bridal Client</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Clean environment, friendly staff, great value for money. Best grooming experience in the area!"</p><div class="t-author"><div class="t-avatar gold-gradient">B</div><div><div class="t-name">Bikash Hazarika</div><div class="t-role">Regular Customer</div></div></div></div>
+      <!-- Duplicate for seamless loop -->
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Best salon in Kharsang! The hair spa was absolutely amazing. My hair feels so silky now."</p><div class="t-author"><div class="t-avatar gold-gradient">P</div><div><div class="t-name">Priya Sharma</div><div class="t-role">Regular Customer</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Excellent beard styling! The staff are skilled and very professional. Highly recommended!"</p><div class="t-author"><div class="t-avatar gold-gradient">R</div><div><div class="t-name">Rohan Das</div><div class="t-role">Loyal Customer</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Love this place! Clean, hygienic and they use quality products. My go-to salon always."</p><div class="t-author"><div class="t-avatar gold-gradient">S</div><div><div class="t-name">Sunita Boruah</div><div class="t-role">Happy Client</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★☆</div><p class="t-text">"Great haircut experience. The stylist understood exactly what I wanted. Will definitely come back!"</p><div class="t-author"><div class="t-avatar gold-gradient">A</div><div><div class="t-name">Amit Gogoi</div><div class="t-role">Customer</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"The bridal makeup they did for my wedding was stunning. Got so many compliments from everyone!"</p><div class="t-author"><div class="t-avatar gold-gradient">D</div><div><div class="t-name">Deepika Choudhury</div><div class="t-role">Bridal Client</div></div></div></div>
+      <div class="testimonial-card"><div class="t-stars">★★★★★</div><p class="t-text">"Clean environment, friendly staff, great value for money. Best grooming experience in the area!"</p><div class="t-author"><div class="t-avatar gold-gradient">B</div><div><div class="t-name">Bikash Hazarika</div><div class="t-role">Regular Customer</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Visit Us</p>
+      <h2 class="section-title" style="color:var(--navy)">Find Us</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="location-grid" style="margin-top:2.5rem">
+      <div class="location-card">
+        <h3>PR Unisex Salon</h3>
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div><div class="info-label">Address</div><div class="info-value">Near Kharsang Bridge (Left side)<br>Kharsang, Changlang<br>Arunachal Pradesh – 792122</div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🕐</div>
+          <div><div class="info-label">Hours</div><div class="info-value">Monday – Sunday: 10:00 AM – 8:00 PM<br><span class="open-badge"><span class="open-dot"></span>Open Today</span></div></div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div><div class="info-label">Contact</div><div class="info-value"><a href="tel:+918414916341">+91 84149 16341</a><br><a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" style="color:#16a34a">💬 WhatsApp us</a></div></div>
+        </div>
+        <div class="loc-btns">
+          <a href="https://maps.app.goo.gl/2addF8ZLpYViQHhi6" target="_blank" class="loc-btn loc-btn-navy">📍 Get Directions</a>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" class="loc-btn loc-btn-wa">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="map-wrap">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14547.5!2d95.78!3d27.19!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3742d7a7a7a7a7a7%3A0x0!2sKharsang%2C+Arunachal+Pradesh!5e0!3m2!1sen!2sin!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="PR Unisex Salon Location"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-content">
+    <p class="section-label">Ready?</p>
+    <h2 class="section-title">Book Your <span class="gold-text">Transformation</span> Today</h2>
+    <p>Just message us on WhatsApp — we'll confirm your slot instantly!</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" class="btn-primary" style="font-size:1rem;padding:1rem 2rem">💬 Book on WhatsApp</a>
+      <a href="tel:+918414916341" class="btn-secondary" style="font-size:1rem;padding:1rem 2rem">📞 +91 84149 16341</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:0.3rem">
+          <div class="nav-logo-icon gold-gradient" style="width:42px;height:42px">✂️</div>
+          <div class="nav-logo-text">
+            <span style="font-size:1.2rem">PR Unisex Salon</span>
+            <span>Kharsang</span>
+          </div>
+        </div>
+        <p>Premium grooming & beauty services trusted by the people of Kharsang. Your confidence is our craft.</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/" target="_blank" class="social-link">📷</a>
+          <a href="https://www.facebook.com/" target="_blank" class="social-link">📘</a>
+          <a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" class="social-link">💬</a>
+          <a href="https://www.youtube.com/" target="_blank" class="social-link">▶️</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Haircut & Styling</a></li>
+          <li><a href="#services">Hair Spa</a></li>
+          <li><a href="#services">Beard Styling</a></li>
+          <li><a href="#services">Facial</a></li>
+          <li><a href="#services">Makeup</a></li>
+          <li><a href="#services">Hair Coloring</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">📍 Near Kharsang Bridge, Changlang, AP – 792122</a></li>
+          <li><a href="tel:+918414916341">📞 +91 84149 16341</a></li>
+          <li><a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank">💬 WhatsApp Booking</a></li>
+          <li><a href="#">🕐 Mon–Sun: 10AM – 8PM</a></li>
+          <li><a href="https://maps.app.goo.gl/2addF8ZLpYViQHhi6" target="_blank">🗺️ Google Maps</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 PR Unisex Salon, Kharsang. All rights reserved.</p>
+      <p>⭐⭐⭐⭐ 4.0 on Google Maps</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/918414916341?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%20PR%20Unisex%20Salon" target="_blank" class="wa-float" aria-label="WhatsApp">💬</a>
+
+<script>
+  // Sticky nav
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.add('open');
+  });
+  document.getElementById('mobileClose').addEventListener('click', closeMobile);
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Service filter
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const filter = tab.dataset.filter;
+      document.querySelectorAll('.service-card').forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
